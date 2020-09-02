@@ -1,0 +1,12 @@
+<resources>
+  <string name="app_name">ChallengeForZuper</string>
+  <string name="action_settings">Settings</string>
+  <!-- Strings used for fragments for navigation -->
+  <string name="home_fragment_label">Home Fragment</string>
+
+<!--  Home Fragment-->
+  <string name="hint_operation">Operation ID</string>
+  <string name="execute">Execute</string>
+  <string name="err_no_operation_id">Please input operation id.</string>
+
+</resources>
