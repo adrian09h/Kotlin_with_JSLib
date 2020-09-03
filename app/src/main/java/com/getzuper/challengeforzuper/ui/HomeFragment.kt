@@ -45,6 +45,7 @@ class HomeFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeFragViewModel::class.java)
         initWithViewModel()
+        showProgress()
         viewModel.loadJSContent()
     }
 
@@ -78,11 +79,10 @@ class HomeFragment : BaseFragment() {
 
     private fun initWithViewModel() {
         viewModel.getJsContentLiveData().observe(viewLifecycleOwner, Observer {
+            hideProgress()
             configWebView(it)
         })
         viewModel.getMessageListData().observe(viewLifecycleOwner, Observer {
-            Log.d("Holder", "getMessageListData")
-            Log.d("Holder", "============")
             adapter.updateList(it)
         })
     }
@@ -106,5 +106,13 @@ class HomeFragment : BaseFragment() {
     private fun executeOperation(id: String) {
         val urlString = "javascript: startOperation('$id');"
         webView.loadUrl(urlString)
+    }
+
+    private fun showProgress() {
+        progress_bar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgress() {
+        progress_bar.visibility = View.INVISIBLE
     }
 }

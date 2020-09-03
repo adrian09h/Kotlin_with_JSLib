@@ -36,12 +36,29 @@ class HomeFragViewModel @Inject constructor(
             oldList = ArrayList()
         }
         val newMessage = Gson().fromJson(result, MessageFromJS::class.java)
-        val indexOfFist = oldList.indexOfFirst { it.id == newMessage.id }
-        if (indexOfFist > -1) {
+        val indexOfFirst = oldList.indexOfFirst { it.id == newMessage.id }
+        if (indexOfFirst > -1) {
             //existing operation
-            oldList[indexOfFist] = newMessage
+            val oldOne = oldList[indexOfFirst]
+            if (newMessage.isCompletedType()) {
+                if (newMessage.state!! == "error") {
+                    newMessage.progress = oldOne.progress
+                } else {
+                    newMessage.progress = "100"
+                }
+            }
+            oldList[indexOfFirst] = newMessage
         } else {
             //new operation
+            if (newMessage.isCompletedType()) {
+                if (newMessage.state!! == "error") {
+                    //got error as a first message for the operation
+                    newMessage.progress = "0"
+                } else {
+                    //possible?
+                    newMessage.progress = "100"
+                }
+            }
             oldList.add(newMessage)
         }
         messageListData.postValue(oldList)

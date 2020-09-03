@@ -10,8 +10,6 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/_60sdp"
-    android:paddingStart="@dimen/_12sdp"
-    android:paddingEnd="@dimen/_12sdp"
     android:paddingTop="@dimen/_6sdp"
     android:paddingBottom="@dimen/_6sdp"
     >
@@ -31,7 +29,7 @@
             android:textSize="@dimen/_14ssp"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_6sdp"
             app:layout_constraintTop_toTopOf="@+id/progress_bar"
             app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
             />

@@ -10,32 +10,19 @@ import kotlinx.android.synthetic.main.item_operation.view.*
 
 @BindingAdapter("bind:setProgress")
 fun setProgress(progressBar: ProgressBar, messageFromJS: MessageFromJS) {
-    if (messageFromJS.isProgressType()) {
+    if (!messageFromJS.progress.isNullOrEmpty()) {
         progressBar.progress = messageFromJS.progress!!.toInt()
-    } else {
-        if (messageFromJS.isCompletedType()) {
-            if (messageFromJS.state!! == "success") {
-                progressBar.progress = 100
-            } else {
-                progressBar.progress = messageFromJS.progress!!.toInt()
-            }
-        }
     }
 }
 
 @BindingAdapter("bind:setProgressText")
 fun setProgressText(textView: TextView, messageFromJS: MessageFromJS) {
-    if (messageFromJS.isProgressType()) {
-        textView.text = messageFromJS.progress
-    } else {
-        if (messageFromJS.isCompletedType()) {
-            if( messageFromJS.state!! == "success") {
-                textView.text = "100"
-                textView.setTextColor(textView.context.getColor(R.color.greenColor))
-            } else {
-                textView.text = messageFromJS.progress
-                textView.setTextColor(textView.context.getColor(R.color.redColor))
-            }
+    textView.text = messageFromJS.progress
+    if (messageFromJS.isCompletedType()) {
+        if( messageFromJS.state!! == "success") {
+            textView.setTextColor(textView.context.getColor(R.color.greenColor))
+        } else {
+            textView.setTextColor(textView.context.getColor(R.color.redColor))
         }
     }
 }

@@ -3,7 +3,7 @@ package com.getzuper.challengeforzuper.data.model
 data class MessageFromJS (
     val id: String = "",
     val message: String = "",
-    val progress: String? = "",
+    var progress: String? = "",
     val state: String? = "") {
 
     fun isProgressType(): Boolean {
